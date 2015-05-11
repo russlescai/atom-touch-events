@@ -47,7 +47,7 @@ module.exports = AtomTouchEvents =
   # Touch points have been updated. Determine if constitutes a swipe,
   # and then update the reference points.
   handleTouchMove: (args) ->
-    source = args.srcElement.getModel()
+    source = args.srcElement
 
     deltaX = args.touches[0].pageY - AtomTouchEvents.startY
     deltaY = args.touches[0].pageX - AtomTouchEvents.startX
