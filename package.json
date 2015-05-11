@@ -3,7 +3,7 @@
   "main": "./lib/main",
   "version": "0.0.0",
   "description": "Provides Touchscreen event handling gesture capability",
-  "repository": "https://github.com/russlescai/atom-touch-scroll",
+  "repository": "https://github.com/russlescai/atom-touch-events",
   "license": "MIT",
   "engines": {
     "atom": ">=0.174.0 <2.0.0"
