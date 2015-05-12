@@ -16,8 +16,8 @@ module.exports = AtomTouchScroll =
 
       if source?.nodeName.toLowerCase() is 'atom-text-editor'
         editor = source.getModel()
-        # Determine amount to scroll based on delta value with a factor of 5.
-        amount = Math.abs(deltaY) * @scrollFactor
+        # Determine amount to scroll based on delta value with a scroll factor.
+        amount = Math.abs(deltaY) * AtomTouchScroll.scrollFactor
         editor.setScrollTop(editor.getScrollTop() + amount)
 
     # Scrolls down, based on touch event deltas.
@@ -26,6 +26,6 @@ module.exports = AtomTouchScroll =
 
       if source?.nodeName.toLowerCase() is 'atom-text-editor'
         editor = source.getModel()
-        # Determine amount to scroll based on delta value with a factor of 5.
-        amount = Math.abs(deltaY) * @scrollFactor
+        # Determine amount to scroll based on delta value with a scroll factor.
+        amount = Math.abs(deltaY) * AtomTouchScroll.scrollFactor
         editor.setScrollTop(editor.getScrollTop() - amount)
