@@ -3,10 +3,6 @@ AtomTouchEvents = require './atom-touch-events'
 module.exports = AtomTouchScroll =
 
     activate: () ->
-
-      # Factor to multiply delta amount by to scroll.
-      @scrollFactor = 5
-
       AtomTouchEvents.onDidTouchSwipeUp(@touchScrollUp)
       AtomTouchEvents.onDidTouchSwipeDown(@touchScrollDown)
 
@@ -16,7 +12,8 @@ module.exports = AtomTouchScroll =
 
       if source?.nodeName.toLowerCase() is 'atom-text-editor'
         editor = source.getModel()
-        # Determine amount to scroll based on delta value with a scroll factor.
+
+        # Determine amount to scroll based on delta value.
         amount = Math.abs(deltaY) * AtomTouchScroll.scrollFactor
         editor.setScrollTop(editor.getScrollTop() + amount)
 
@@ -26,6 +23,7 @@ module.exports = AtomTouchScroll =
 
       if source?.nodeName.toLowerCase() is 'atom-text-editor'
         editor = source.getModel()
-        # Determine amount to scroll based on delta value with a scroll factor.
-        amount = Math.abs(deltaY) * AtomTouchScroll.scrollFactor
+
+        # Determine amount to scroll based on delta value.
+        amount = Math.abs(deltaY)
         editor.setScrollTop(editor.getScrollTop() - amount)
