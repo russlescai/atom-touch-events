@@ -49,8 +49,8 @@ module.exports = AtomTouchEvents =
   handleTouchMove: (args) ->
     source = args.srcElement
 
-    deltaX = args.touches[0].pageY - AtomTouchEvents.startY
-    deltaY = args.touches[0].pageX - AtomTouchEvents.startX
+    deltaX = args.touches[0].pageX - AtomTouchEvents.startX
+    deltaY = args.touches[0].pageY - AtomTouchEvents.startY
     points = {deltaX, deltaY}
 
     AtomTouchEvents.startX = args.touches[0].pageX
@@ -71,16 +71,16 @@ module.exports = AtomTouchEvents =
 
   isSwipeUp: (points) ->
     {deltaX, deltaY} = points
-    Math.abs(deltaY) < AtomTouchEvents.minRangeForSwipe and deltaX < 0
+    Math.abs(deltaX) < AtomTouchEvents.minRangeForSwipe and deltaY < 0
 
   isSwipeDown: (points) ->
     {deltaX, deltaY} = points
-    Math.abs(deltaY) < AtomTouchEvents.minRangeForSwipe and deltaX > 0
+    Math.abs(deltaX) < AtomTouchEvents.minRangeForSwipe and deltaY > 0
 
   isSwipeLeft: (points) ->
     {deltaX, deltaY} = points
-    Math.abs(deltaX) < AtomTouchEvents.minRangeForSwipe and deltaY > 0
+    Math.abs(deltaY) < AtomTouchEvents.minRangeForSwipe and deltaX < 0
 
   isSwipeRight: (points) ->
     {deltaX, deltaY} = points
-    Math.abs(deltaX) < AtomTouchEvents.minRangeForSwipe and deltaY > 0
+    Math.abs(deltaY) < AtomTouchEvents.minRangeForSwipe and deltaX > 0
