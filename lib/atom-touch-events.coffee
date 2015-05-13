@@ -97,7 +97,6 @@ module.exports = AtomTouchEvents =
       currentDistance = AtomTouchEvents.getCurrentDistance()
       distance = currentDistance - startDistance
       AtomTouchEvents.emitter.emit 'did-touch-pinch-out', {args, source, distance}
-    if AtomTouchEvents.isPinch()
 
   # Find the Delta (X, Y) values for start and current event arguments.
   getDeltaForIndex: (index) ->
