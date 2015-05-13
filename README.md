@@ -12,8 +12,9 @@ Currently supports gestures:
 
 Provides the following behaviours:
 * Touch-based scrolling (horizontal and vertical) for Text Editors
+* Touch-based zooming (font size adjustment) for Text Editors
 
 Plans:
 * Add more gestures (tap)
-* Add more behaviours (pinch to zoom)
+* Add more behaviours (more granular pinch to zoom)
 * Fix TreeView touch issues

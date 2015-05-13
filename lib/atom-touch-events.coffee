@@ -77,34 +77,27 @@ module.exports = AtomTouchEvents =
     # Detect events, and emit atom events with parameters.
     if AtomTouchEvents.isSwipeUp()
       {deltaX, deltaY} = AtomTouchEvents.getDeltaForIndex 0
-      AtomTouchEvents.emitter.emit 'did-touch-swipe-up', {source, deltaX, deltaY}
-      args.preventDefault()
+      AtomTouchEvents.emitter.emit 'did-touch-swipe-up', {args, source, deltaX, deltaY}
     if AtomTouchEvents.isSwipeDown()
       {deltaX, deltaY} = AtomTouchEvents.getDeltaForIndex 0
-      AtomTouchEvents.emitter.emit 'did-touch-swipe-down', {source, deltaX, deltaY}
-      args.preventDefault()
+      AtomTouchEvents.emitter.emit 'did-touch-swipe-down', {args, source, deltaX, deltaY}
     if AtomTouchEvents.isSwipeLeft()
       {deltaX, deltaY} = AtomTouchEvents.getDeltaForIndex 0
-      AtomTouchEvents.emitter.emit 'did-touch-swipe-left', {source, deltaX, deltaY}
-      args.preventDefault()
+      AtomTouchEvents.emitter.emit 'did-touch-swipe-left', {args, source, deltaX, deltaY}
     if AtomTouchEvents.isSwipeRight()
       {deltaX, deltaY} = AtomTouchEvents.getDeltaForIndex 0
-      AtomTouchEvents.emitter.emit 'did-touch-swipe-right', {source, deltaX, deltaY}
-      args.preventDefault()
+      AtomTouchEvents.emitter.emit 'did-touch-swipe-right', {args, source, deltaX, deltaY}
     if AtomTouchEvents.isPinchIn()
       startDistance = AtomTouchEvents.getStartDistance()
       currentDistance = AtomTouchEvents.getCurrentDistance()
       distance = currentDistance - startDistance
-      AtomTouchEvents.emitter.emit 'did-touch-pinch-in', {source, distance}
-      args.preventDefault()
+      AtomTouchEvents.emitter.emit 'did-touch-pinch-in', {args, source, distance}
     if AtomTouchEvents.isPinchOut()
       startDistance = AtomTouchEvents.getStartDistance()
       currentDistance = AtomTouchEvents.getCurrentDistance()
       distance = currentDistance - startDistance
-      AtomTouchEvents.emitter.emit 'did-touch-pinch-out', {source, distance}
-      args.preventDefault()
+      AtomTouchEvents.emitter.emit 'did-touch-pinch-out', {args, source, distance}
     if AtomTouchEvents.isPinch()
-      args.preventDefault()
 
   # Find the Delta (X, Y) values for start and current event arguments.
   getDeltaForIndex: (index) ->

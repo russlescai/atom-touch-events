@@ -1,3 +1,7 @@
+## 0.10.0 - Fixes and Changes
+* Add Zoom behaviour with pinching
+* Do not always preventDefault. Allow subscriber to do this instead.
+
 ## 0.7.0 - Fixes and Changes
 * Pinch events can now be subscribed to
 * Scroll horizontally and vertically

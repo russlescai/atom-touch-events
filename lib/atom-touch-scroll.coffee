@@ -14,8 +14,8 @@ module.exports = AtomTouchScroll =
       AtomTouchEvents.onDidTouchSwipeRight(@touchScrollRight)
 
     # Scrolls up, based on touch event deltas.
-    touchScrollUp: (args) ->
-      {source, deltaX, deltaY} = args
+    touchScrollUp: (event) ->
+      {args, source, deltaX, deltaY} = event
 
       view = source.closest("atom-text-editor")
 
@@ -25,9 +25,11 @@ module.exports = AtomTouchScroll =
         amount = Math.abs(deltaY)
         editor.setScrollTop(editor.getScrollTop() + amount)
 
+        args.preventDefault()
+
     # Scrolls down, based on touch event deltas.
-    touchScrollDown: (args) ->
-      {source, deltaX, deltaY} = args
+    touchScrollDown: (event) ->
+      {args, source, deltaX, deltaY} = event
 
       view = source.closest("atom-text-editor")
 
@@ -37,9 +39,11 @@ module.exports = AtomTouchScroll =
         amount = Math.abs(deltaY)
         editor.setScrollTop(editor.getScrollTop() - amount)
 
+        args.preventDefault()
+
     # Scrolls left, based on touch event deltas.
-    touchScrollLeft: (args) ->
-      {source, deltaX, deltaY} = args
+    touchScrollLeft: (event) ->
+      {args, source, deltaX, deltaY} = event
 
       view = source.closest("atom-text-editor")
 
@@ -49,9 +53,11 @@ module.exports = AtomTouchScroll =
         amount = Math.abs(deltaX)
         editor.setScrollLeft(editor.getScrollLeft() + amount)
 
+        args.preventDefault()
+
     # Scrolls left, based on touch event deltas.
-    touchScrollRight: (args) ->
-      {source, deltaX, deltaY} = args
+    touchScrollRight: (event) ->
+      {args, source, deltaX, deltaY} = event
 
       view = source.closest("atom-text-editor")
 
@@ -60,3 +66,5 @@ module.exports = AtomTouchScroll =
         # Determine amount to scroll based on delta value.
         amount = Math.abs(deltaX)
         editor.setScrollLeft(editor.getScrollLeft() - amount)
+
+        args.preventDefault()
