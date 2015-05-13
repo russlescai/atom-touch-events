@@ -15,8 +15,10 @@ module.exports = AtomTouchEvents =
     @minRangeForSwipe = 20
 
     # Attach event listeners.
-    document.addEventListener 'touchstart', AtomTouchEvents.handleTouchStart
-    document.addEventListener 'touchmove', AtomTouchEvents.handleTouchMove
+    atom.workspace.observeTextEditors (editor) ->
+      view = atom.views.getView editor
+      view.addEventListener 'touchstart', AtomTouchEvents.handleTouchStart
+      view.addEventListener 'touchmove', AtomTouchEvents.handleTouchMove
 
   # Release subscribers.
   destroy: ->
