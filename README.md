@@ -3,12 +3,12 @@
 Provides touchscreen event handling and gesture capability.
 
 Currently supports gestures:
-* AtomTouchEvents.onDidSwipeUp
-* AtomTouchEvents.onDidSwipeDown
-* AtomTouchEvents.onDidSwipeLeft
-* AtomTouchEvents.onDidSwipeRight
-* AtomTouchEvents.onDidPinchIn
-* AtomTouchEvents.onDidPinchOut
+* AtomTouchEvents.onDidTouchSwipeUp
+* AtomTouchEvents.onDidTouchSwipeDown
+* AtomTouchEvents.onDidTouchSwipeLeft
+* AtomTouchEvents.onDidTouchSwipeRight
+* AtomTouchEvents.onDidTouchPinchIn
+* AtomTouchEvents.onDidTouchPinchOut
 
 Provides the following behaviours:
 * Touch-based scrolling (horizontal and vertical) for Text Editors
