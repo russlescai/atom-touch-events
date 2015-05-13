@@ -17,38 +17,46 @@ module.exports = AtomTouchScroll =
     touchScrollUp: (args) ->
       {source, deltaX, deltaY} = args
 
-      editor = atom.workspace.getActiveTextEditor()
+      view = source.closest("atom-text-editor")
 
-      # Determine amount to scroll based on delta value.
-      amount = Math.abs(deltaY)
-      editor.setScrollTop(editor.getScrollTop() + amount)
+      if view != null
+        editor = view.getModel()
+        # Determine amount to scroll based on delta value.
+        amount = Math.abs(deltaY)
+        editor.setScrollTop(editor.getScrollTop() + amount)
 
     # Scrolls down, based on touch event deltas.
     touchScrollDown: (args) ->
       {source, deltaX, deltaY} = args
 
-      editor = atom.workspace.getActiveTextEditor()
+      view = source.closest("atom-text-editor")
 
-      # Determine amount to scroll based on delta value.
-      amount = Math.abs(deltaY)
-      editor.setScrollTop(editor.getScrollTop() - amount)
+      if view != null
+        editor = view.getModel()
+        # Determine amount to scroll based on delta value.
+        amount = Math.abs(deltaY)
+        editor.setScrollTop(editor.getScrollTop() - amount)
 
     # Scrolls left, based on touch event deltas.
     touchScrollLeft: (args) ->
       {source, deltaX, deltaY} = args
 
-      editor = atom.workspace.getActiveTextEditor()
+      view = source.closest("atom-text-editor")
 
-      # Determine amount to scroll based on delta value.
-      amount = Math.abs(deltaX)
-      editor.setScrollLeft(editor.getScrollLeft() + amount)
+      if view != null
+        editor = view.getModel()
+        # Determine amount to scroll based on delta value.
+        amount = Math.abs(deltaX)
+        editor.setScrollLeft(editor.getScrollLeft() + amount)
 
     # Scrolls left, based on touch event deltas.
     touchScrollRight: (args) ->
       {source, deltaX, deltaY} = args
 
-      editor = atom.workspace.getActiveTextEditor()
+      view = source.closest("atom-text-editor")
 
-      # Determine amount to scroll based on delta value.
-      amount = Math.abs(deltaX)
-      editor.setScrollLeft(editor.getScrollLeft() - amount)
+      if view != null
+        editor = view.getModel()
+        # Determine amount to scroll based on delta value.
+        amount = Math.abs(deltaX)
+        editor.setScrollLeft(editor.getScrollLeft() - amount)
