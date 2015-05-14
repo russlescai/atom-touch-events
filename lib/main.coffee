@@ -9,25 +9,25 @@ module.exports = Main =
     AtomTouchZoom.activate()
 
     # Touch swipe gesture down the screen
-  onDidTouchSwipeDown: (callback) ->
-    AtomTouchEvents.onDidTouchSwipeDown callback
+  onDidTouchSwipeDown: ->
+    AtomTouchEvents.onDidTouchSwipeDown
 
   # Touch swipe gesture up the screen
-  onDidTouchSwipeUp: (callback) ->
-    AtomTouchEvents.onDidTouchSwipeUp callback
+  onDidTouchSwipeUp: ->
+    AtomTouchEvents.onDidTouchSwipeUp
 
   # Touch swipe gesture left of the screen
-  onDidTouchSwipeLeft: (callback) ->
-    AtomTouchEvents.onDidTouchSwipeLeft callback
+  onDidTouchSwipeLeft: ->
+    AtomTouchEvents.onDidTouchSwipeLeft
 
   # Touch swipe gesture right of the screen
-  onDidTouchSwipeRight: (callback) ->
-    AtomTouchEvents.onDidTouchSwipeRight callback
+  onDidTouchSwipeRight: ->
+    AtomTouchEvents.onDidTouchSwipeRight
 
   # Touch pinch gesture in towards the center
-  onDidTouchPinchIn: (callback) ->
-    AtomTouchEvents.onDidTouchPinchIn callback
+  onDidTouchPinchIn: ->
+    AtomTouchEvents.onDidTouchPinchIn
 
   # Touch pinch gesture out away from the center
-  onDidTouchPinchOut: (callback) ->
-    AtomTouchEvents.onDidTouchPinchOut callback
+  onDidTouchPinchOut: ->
+    AtomTouchEvents.onDidTouchPinchOut
