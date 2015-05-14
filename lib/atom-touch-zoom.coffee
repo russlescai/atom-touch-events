@@ -8,17 +8,23 @@ module.exports = AtomTouchZoom =
     touchZoomIn: (event) ->
       {args, source, distance} = event
 
-      if Math.abs(distance) > 2
-        fontSize = atom.config.get("editor.fontSize")
-        atom.config.set("editor.fontSize", fontSize + 1)
+      view = source.closest("atom-text-editor")
+
+      if view != null
+        if Math.abs(distance) > 2
+          fontSize = atom.config.get("editor.fontSize")
+          atom.config.set("editor.fontSize", fontSize + 1)
 
         args.preventDefault()
 
     touchZoomOut: (event) ->
       {args, source, distance} = event
 
-      if Math.abs(distance) > 2
-        fontSize = atom.config.get("editor.fontSize")
-        atom.config.set("editor.fontSize", fontSize - 1)
+      view = source.closest("atom-text-editor")
+
+      if view != null
+        if Math.abs(distance) > 2
+          fontSize = atom.config.get("editor.fontSize")
+          atom.config.set("editor.fontSize", fontSize - 1)
 
         args.preventDefault()
