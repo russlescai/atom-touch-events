@@ -8,5 +8,43 @@
   "engines": {
     "atom": ">=0.174.0 <2.0.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "providedServices": {
+    "touch-swipe-down-service": {
+      "description": "Touch swipe gesture down the screen",
+      "versions": {
+        "0.12.0": "onDidTouchSwipeDown"
+      }
+    },
+    "touch-swipe-up-service": {
+      "description": "Touch swipe gesture up the screen",
+      "versions": {
+        "0.12.0": "onDidTouchSwipeUp"
+      }
+    },
+    "touch-swipe-left-service": {
+      "description": "Touch swipe gesture left of the screen",
+      "versions": {
+        "0.12.0": "onDidTouchSwipeLeft"
+      }
+    },
+    "touch-swipe-right-service": {
+      "description": "Touch swipe gesture right the screen",
+      "versions": {
+        "0.12.0": "onDidTouchSwipeRight"
+      }
+    },
+    "touch-pinch-in-service": {
+      "description": "Touch pinch gesture in together",
+      "versions": {
+        "0.12.0": "onDidTouchPinchIn"
+      }
+    },
+    "touch-pinch-out-service": {
+      "description": "Touch pinch gesture apart",
+      "versions": {
+        "0.12.0": "onDidTouchPinchOut"
+      }
+    }
+  }
 }
