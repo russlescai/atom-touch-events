@@ -2,7 +2,10 @@
 
 Provides touchscreen event handling and gesture capability.
 
-Currently supports gestures:
+This package exposes the events listed below as part of Atom Services.
+For more information about consuming these services in your package, read here: https://atom.io/docs/latest/behind-atom-interacting-with-packages-via-services.
+
+Currently supports gesture events:
 * AtomTouchEvents.onDidTouchSwipeUp
 * AtomTouchEvents.onDidTouchSwipeDown
 * AtomTouchEvents.onDidTouchSwipeLeft
