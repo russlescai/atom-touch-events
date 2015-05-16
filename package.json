@@ -1,7 +1,7 @@
 {
   "name": "atom-touch-events",
   "main": "./lib/main",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "Provides Touchscreen event handling gesture capability",
   "repository": "https://github.com/russlescai/atom-touch-events",
   "license": "MIT",
