@@ -29,28 +29,27 @@ module.exports = AtomTouchEvents =
 
   # Touch swipe gesture down the screen
   onDidTouchSwipeDown: (callback) ->
-    @emitter.on 'did-touch-swipe-down', callback
+    AtomTouchEvents.emitter.on 'did-touch-swipe-down', callback
 
   # Touch swipe gesture up the screen
   onDidTouchSwipeUp: (callback) ->
-    @emitter.on 'did-touch-swipe-up', callback
+    AtomTouchEvents.emitter.on 'did-touch-swipe-up', callback
 
   # Touch swipe gesture left on the screen
   onDidTouchSwipeLeft: (callback) ->
-    @emitter.on 'did-touch-swipe-left', callback
+    AtomTouchEvents.emitter.on 'did-touch-swipe-left', callback
 
   # Touch swipe gesture right on the screen
   onDidTouchSwipeRight: (callback) ->
-    @emitter.on 'did-touch-swipe-right', callback
+    AtomTouchEvents.emitter.on 'did-touch-swipe-right', callback
 
   # Touch pinch gesture in (moving together)
   onDidTouchPinchIn: (callback) ->
-    @emitter.on 'did-touch-pinch-in', callback
+    AtomTouchEvents.emitter.on 'did-touch-pinch-in', callback
 
   # Touch pinch gesture out (moving apart)
   onDidTouchPinchOut: (callback) ->
-    @emitter.on 'did-touch-pinch-out', callback
-
+    AtomTouchEvents.emitter.on 'did-touch-pinch-out', callback
 
   ###
   Section: Touch Behaviour Logic
@@ -74,29 +73,31 @@ module.exports = AtomTouchEvents =
     AtomTouchEvents.startArgs = AtomTouchEvents.currentArgs
     AtomTouchEvents.currentArgs = args
 
+    elapsedTime = AtomTouchEvents.currentArgs.timeStamp - AtomTouchEvents.startArgs.timeStamp
+
     # Detect events, and emit atom events with parameters.
     if AtomTouchEvents.isSwipeUp()
       {deltaX, deltaY} = AtomTouchEvents.getDeltaForIndex 0
-      AtomTouchEvents.emitter.emit 'did-touch-swipe-up', {args, source, deltaX, deltaY}
+      AtomTouchEvents.emitter.emit 'did-touch-swipe-up', {args, source, deltaX, deltaY, elapsedTime}
     if AtomTouchEvents.isSwipeDown()
       {deltaX, deltaY} = AtomTouchEvents.getDeltaForIndex 0
-      AtomTouchEvents.emitter.emit 'did-touch-swipe-down', {args, source, deltaX, deltaY}
+      AtomTouchEvents.emitter.emit 'did-touch-swipe-down', {args, source, deltaX, deltaY, elapsedTime}
     if AtomTouchEvents.isSwipeLeft()
       {deltaX, deltaY} = AtomTouchEvents.getDeltaForIndex 0
-      AtomTouchEvents.emitter.emit 'did-touch-swipe-left', {args, source, deltaX, deltaY}
+      AtomTouchEvents.emitter.emit 'did-touch-swipe-left', {args, source, deltaX, deltaY, elapsedTime}
     if AtomTouchEvents.isSwipeRight()
       {deltaX, deltaY} = AtomTouchEvents.getDeltaForIndex 0
-      AtomTouchEvents.emitter.emit 'did-touch-swipe-right', {args, source, deltaX, deltaY}
+      AtomTouchEvents.emitter.emit 'did-touch-swipe-right', {args, source, deltaX, deltaY, elapsedTime}
     if AtomTouchEvents.isPinchIn()
       startDistance = AtomTouchEvents.getStartDistance()
       currentDistance = AtomTouchEvents.getCurrentDistance()
       distance = currentDistance - startDistance
-      AtomTouchEvents.emitter.emit 'did-touch-pinch-in', {args, source, distance}
+      AtomTouchEvents.emitter.emit 'did-touch-pinch-in', {args, source, distance, elapsedTime}
     if AtomTouchEvents.isPinchOut()
       startDistance = AtomTouchEvents.getStartDistance()
       currentDistance = AtomTouchEvents.getCurrentDistance()
       distance = currentDistance - startDistance
-      AtomTouchEvents.emitter.emit 'did-touch-pinch-out', {args, source, distance}
+      AtomTouchEvents.emitter.emit 'did-touch-pinch-out', {args, source, distance, elapsedTime}
 
   # Find the Delta (X, Y) values for start and current event arguments.
   getDeltaForIndex: (index) ->
