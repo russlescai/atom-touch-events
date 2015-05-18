@@ -112,6 +112,10 @@ module.exports = AtomTouchEvents =
   handleTouchEnd: (args) ->
     source = args.srcElement
 
+    # Store previous arguments for comparison of move.
+    AtomTouchEvents.startArgs = AtomTouchEvents.currentArgs
+    AtomTouchEvents.currentArgs = args
+
     elapsedTime = args.timeStamp - AtomTouchEvents.currentArgs.timeStamp
 
     if AtomTouchEvents.isSwipeUp()
@@ -129,35 +133,35 @@ module.exports = AtomTouchEvents =
 
   # Find the Delta (X, Y) values for start and current event arguments.
   getDeltaForIndex: (index) ->
-    deltaX = AtomTouchEvents.currentArgs.touches[index].pageX - AtomTouchEvents.startArgs.touches[index].pageX
-    deltaY = AtomTouchEvents.currentArgs.touches[index].pageY - AtomTouchEvents.startArgs.touches[index].pageY
+    deltaX = AtomTouchEvents.currentArgs.changedTouches[index].pageX - AtomTouchEvents.startArgs.changedTouches[index].pageX
+    deltaY = AtomTouchEvents.currentArgs.changedTouches[index].pageY - AtomTouchEvents.startArgs.changedTouches[index].pageY
     {deltaX, deltaY}
 
   # Find the distance between pinches for the start argument.
   getStartDistance: ->
-    if AtomTouchEvents.startArgs.touches.length == 1
+    if AtomTouchEvents.startArgs.changedTouches.length == 1
       return 0
 
-    x1 = AtomTouchEvents.startArgs.touches[0].pageX
-    x2 = AtomTouchEvents.startArgs.touches[1].pageX
-    y1 = AtomTouchEvents.startArgs.touches[0].pageY
-    y2 = AtomTouchEvents.startArgs.touches[1].pageY
+    x1 = AtomTouchEvents.startArgs.changedTouches[0].pageX
+    x2 = AtomTouchEvents.startArgs.changedTouches[1].pageX
+    y1 = AtomTouchEvents.startArgs.changedTouches[0].pageY
+    y2 = AtomTouchEvents.startArgs.changedTouches[1].pageY
     Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2))
 
   # Find the distance between pinches for the current argument.
   getCurrentDistance: ->
-    if AtomTouchEvents.currentArgs.touches.length == 1
+    if AtomTouchEvents.currentArgs.changedTouches.length == 1
       return 0
 
-    x1 = AtomTouchEvents.currentArgs.touches[0].pageX
-    x2 = AtomTouchEvents.currentArgs.touches[1].pageX
-    y1 = AtomTouchEvents.currentArgs.touches[0].pageY
-    y2 = AtomTouchEvents.currentArgs.touches[1].pageY
+    x1 = AtomTouchEvents.currentArgs.changedTouches[0].pageX
+    x2 = AtomTouchEvents.currentArgs.changedTouches[1].pageX
+    y1 = AtomTouchEvents.currentArgs.changedTouches[0].pageY
+    y2 = AtomTouchEvents.currentArgs.changedTouches[1].pageY
     Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2))
 
   # Determine if the event is a pinch event (two finger)
   isPinch: ->
-    AtomTouchEvents.currentArgs.touches.length == 2
+    AtomTouchEvents.currentArgs.changedTouches.length == 2
 
   # Determine if the event is a pinch in event
   # (Two finger, distance decreasing)
@@ -179,7 +183,7 @@ module.exports = AtomTouchEvents =
 
   # Determine if the event is a swipe event (one finger)
   isSwipe: ->
-    AtomTouchEvents.currentArgs.touches.length == 1
+    AtomTouchEvents.currentArgs.changedTouches.length == 1
 
   # Determine if the event is a swipe up event (one finger, Y decreasing)
   isSwipeUp: ->
