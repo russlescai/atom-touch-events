@@ -17,6 +17,7 @@ module.exports = AtomTouchEvents =
     # Attach event listeners.
     document.addEventListener 'touchstart', AtomTouchEvents.handleTouchStart
     document.addEventListener 'touchmove', AtomTouchEvents.handleTouchMove
+    document.addEventListener 'touchend', AtomTouchEvents.handleTouchEnd
 
   # Release subscribers.
   destroy: ->
@@ -28,28 +29,37 @@ module.exports = AtomTouchEvents =
   ###
 
   # Touch swipe gesture down the screen
-  onDidTouchSwipeDown: (callback) ->
-    AtomTouchEvents.emitter.on 'did-touch-swipe-down', callback
+  onDidTouchSwipeDown: (callback, done) ->
+    AtomTouchEvents.addEventListener 'did-touch-swipe-down', callback, done
 
   # Touch swipe gesture up the screen
-  onDidTouchSwipeUp: (callback) ->
-    AtomTouchEvents.emitter.on 'did-touch-swipe-up', callback
+  onDidTouchSwipeUp: (callback, done) ->
+    AtomTouchEvents.addEventListener 'did-touch-swipe-up', callback, done
 
   # Touch swipe gesture left on the screen
-  onDidTouchSwipeLeft: (callback) ->
-    AtomTouchEvents.emitter.on 'did-touch-swipe-left', callback
+  onDidTouchSwipeLeft: (callback, done) ->
+    AtomTouchEvents.addEventListener 'did-touch-swipe-left', callback, done
 
   # Touch swipe gesture right on the screen
-  onDidTouchSwipeRight: (callback) ->
-    AtomTouchEvents.emitter.on 'did-touch-swipe-right', callback
+  onDidTouchSwipeRight: (callback, done) ->
+    AtomTouchEvents.addEventListener 'did-touch-swipe-right', callback, done
 
   # Touch pinch gesture in (moving together)
-  onDidTouchPinchIn: (callback) ->
-    AtomTouchEvents.emitter.on 'did-touch-pinch-in', callback
+  onDidTouchPinchIn: (callback, done) ->
+    AtomTouchEvents.addEventListener 'did-touch-pinch-in', callback, done
 
   # Touch pinch gesture out (moving apart)
-  onDidTouchPinchOut: (callback) ->
-    AtomTouchEvents.emitter.on 'did-touch-pinch-out', callback
+  onDidTouchPinchOut: (callback, done) ->
+    AtomTouchEvents.addEventListener 'did-touch-pinch-out', callback, done
+
+  # Add an event listener for one of the supported events.
+  # callback is called during the touchmove event
+  # done is called on the touchend event
+  addEventListener: (name, callback, done) ->
+    disposables = [AtomTouchEvents.emitter.on name, callback]
+    if done?
+      disposables.push AtomTouchEvents.emitter.on name + '-end', done
+    new CompositeDisposable disposables...
 
   ###
   Section: Touch Behaviour Logic
@@ -98,6 +108,24 @@ module.exports = AtomTouchEvents =
       currentDistance = AtomTouchEvents.getCurrentDistance()
       distance = currentDistance - startDistance
       AtomTouchEvents.emitter.emit 'did-touch-pinch-out', {args, source, distance, elapsedTime}
+
+  handleTouchEnd: (args) ->
+    source = args.srcElement
+
+    elapsedTime = args.timeStamp - AtomTouchEvents.currentArgs.timeStamp
+
+    if AtomTouchEvents.isSwipeUp()
+      AtomTouchEvents.emitter.emit 'did-touch-swipe-up-end', {args, source, elapsedTime}
+    if AtomTouchEvents.isSwipeDown()
+      AtomTouchEvents.emitter.emit 'did-touch-swipe-down-end', {args, source, elapsedTime}
+    if AtomTouchEvents.isSwipeLeft()
+      AtomTouchEvents.emitter.emit 'did-touch-swipe-left-end', {args, source, elapsedTime}
+    if AtomTouchEvents.isSwipeRight()
+      AtomTouchEvents.emitter.emit 'did-touch-swipe-right-end', {args, source, elapsedTime}
+    if AtomTouchEvents.isPinchIn()
+      AtomTouchEvents.emitter.emit 'did-touch-pinch-in-end', {args, source, elapsedTime}
+    if AtomTouchEvents.isPinchOut()
+      AtomTouchEvents.emitter.emit 'did-touch-pinch-out-end', {args, source, elapsedTime}
 
   # Find the Delta (X, Y) values for start and current event arguments.
   getDeltaForIndex: (index) ->
