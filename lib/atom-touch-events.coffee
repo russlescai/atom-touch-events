@@ -71,7 +71,9 @@ module.exports = AtomTouchEvents =
   # Set the initial set of points for touch events.
   # These will be used to determine deltas.
   handleTouchStart: (args) ->
-    AtomTouchEvents.currentArgs = args
+    # set both to prevent exceptions in getDeltaForIndex, getStartDistance
+    # and getCurrentDistance when no touchmove is triggered before touchend
+    AtomTouchEvents.startArgs = AtomTouchEvents.currentArgs = args
 
   # Touch points have been updated. Determine if constitutes a swipe,
   # and then update the reference points.
@@ -111,10 +113,6 @@ module.exports = AtomTouchEvents =
 
   handleTouchEnd: (args) ->
     source = args.srcElement
-
-    # Store previous arguments for comparison of move.
-    AtomTouchEvents.startArgs = AtomTouchEvents.currentArgs
-    AtomTouchEvents.currentArgs = args
 
     elapsedTime = args.timeStamp - AtomTouchEvents.currentArgs.timeStamp
 
