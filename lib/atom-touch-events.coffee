@@ -52,6 +52,11 @@ module.exports = AtomTouchEvents =
   onDidTouchPinchOut: (callback, done) ->
     AtomTouchEvents.addEventListener 'did-touch-pinch-out', callback, done
 
+  # Touch tap gesture
+  onDidTouchTap: (callback) ->
+    AtomTouchEvents.addEventListener 'did-touch-tap', callback
+
+
   # Add an event listener for one of the supported events.
   # callback is called during the touchmove event
   # done is called on the touchend event
@@ -73,7 +78,7 @@ module.exports = AtomTouchEvents =
   handleTouchStart: (args) ->
     # set both to prevent exceptions in getDeltaForIndex, getStartDistance
     # and getCurrentDistance when no touchmove is triggered before touchend
-    AtomTouchEvents.startArgs = AtomTouchEvents.currentArgs = args
+    AtomTouchEvents.baseArgs = AtomTouchEvents.startArgs = AtomTouchEvents.currentArgs = args
 
   # Touch points have been updated. Determine if constitutes a swipe,
   # and then update the reference points.
@@ -116,6 +121,8 @@ module.exports = AtomTouchEvents =
 
     elapsedTime = args.timeStamp - AtomTouchEvents.currentArgs.timeStamp
 
+    if AtomTouchEvents.isTap(args)
+      AtomTouchEvents.emitter.emit 'did-touch-tap',  {args,source, elapsedTime}
     if AtomTouchEvents.isSwipeUp()
       AtomTouchEvents.emitter.emit 'did-touch-swipe-up-end', {args, source, elapsedTime}
     if AtomTouchEvents.isSwipeDown()
@@ -156,6 +163,12 @@ module.exports = AtomTouchEvents =
     y1 = AtomTouchEvents.currentArgs.changedTouches[0].pageY
     y2 = AtomTouchEvents.currentArgs.changedTouches[1].pageY
     Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2))
+
+  # Determine if the event is a tap event
+  isTap: (args) ->
+    totalElapsedTime = args.timeStamp - AtomTouchEvents.baseArgs.timeStamp
+    totalElapsedTime < 200
+
 
   # Determine if the event is a pinch event (two finger)
   isPinch: ->

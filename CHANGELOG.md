@@ -1,3 +1,6 @@
+## 0.20.0 - Updates
+* Add tap gesture
+
 ## 0.12.0 - Fixes and Changes
 * Include Provided Services to expose events to other packages using Atom API.
 

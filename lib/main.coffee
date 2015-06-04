@@ -1,12 +1,15 @@
 AtomTouchEvents = require './atom-touch-events'
 AtomTouchScroll = require './atom-touch-scroll'
 AtomTouchZoom = require './atom-touch-zoom'
+AtomTouchTap = require './atom-touch-tap'
+
 
 module.exports = Main =
   activate: (state) ->
     AtomTouchEvents.activate()
     AtomTouchScroll.activate()
     AtomTouchZoom.activate()
+    AtomTouchTap.activate()
 
     # Touch swipe gesture down the screen
   onDidTouchSwipeDown: ->
@@ -31,3 +34,7 @@ module.exports = Main =
   # Touch pinch gesture out away from the center
   onDidTouchPinchOut: ->
     AtomTouchEvents.onDidTouchPinchOut
+
+  # Touch tap gesture
+  onDidTouchTap: ->
+    AtomTouchEvents.onDidTouchTap

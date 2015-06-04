@@ -7,6 +7,7 @@ This package exposes the events listed below as part of Atom Services.
 ### Supported behaviours
 * Touch-based scrolling (horizontal and vertical) for Text Editors
 * Touch-based zooming (font size adjustment) for Text Editors
+* Tap sets cursor position without bringing up keyboard
 
 ### Supported gesture events
 * AtomTouchEvents.onDidTouchSwipeUp
@@ -15,9 +16,9 @@ This package exposes the events listed below as part of Atom Services.
 * AtomTouchEvents.onDidTouchSwipeRight
 * AtomTouchEvents.onDidTouchPinchIn
 * AtomTouchEvents.onDidTouchPinchOut
+* AtomTouchEvents.onDidTouchTap
 
 ### Plans
-* Add more gestures (tap)
 * Add more behaviours (more granular pinch to zoom)
 * Fix TreeView touch-related issues
 
