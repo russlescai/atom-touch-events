@@ -38,3 +38,12 @@ module.exports = Main =
   # Touch tap gesture
   onDidTouchTap: ->
     AtomTouchEvents.onDidTouchTap
+
+  provideTouchEvents: ->
+    onDidTouchSwipeDown:  AtomTouchEvents.onDidTouchSwipeDown
+    onDidTouchSwipeUp:    AtomTouchEvents.onDidTouchSwipeUp
+    onDidTouchSwipeLeft:  AtomTouchEvents.onDidTouchSwipeLeft
+    onDidTouchSwipeRight: AtomTouchEvents.onDidTouchSwipeRight
+    onDidTouchPinchIn:    AtomTouchEvents.onDidTouchPinchIn
+    onDidTouchPinchOut:   AtomTouchEvents.onDidTouchPinchOut
+    onDidTouchTap:        AtomTouchEvents.onDidTouchTap
