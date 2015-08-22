@@ -30,18 +30,19 @@ For more information about consuming these services in your package, read here: 
 
 To consume these events, add the following to your package.json (or the services you need):
 
-```
+```json
 "consumedServices": {
   "touch-events": {
     "versions": {
       "^0.21.0": "consumeTouchEvents"
     }
+  }
 }
 ```
 
 Then in your main package, implement your consumer function to use the service function:
 
-```
+```coffee
 consumeTouchEvents: (touchEvents) ->
 
   # Subscribe to touch swipe left event
