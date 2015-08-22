@@ -32,9 +32,9 @@ To consume these events, add the following to your package.json (or the services
 
 ```
 "consumedServices": {
-  "touch-swipe-left-service": {
+  "touch-events": {
     "versions": {
-      "^0.12.0": "consumeOnDidTouchSwipeLeft"
+      "^0.21.0": "consumeTouchEvents"
     }
 }
 ```
@@ -42,9 +42,9 @@ To consume these events, add the following to your package.json (or the services
 Then in your main package, implement your consumer function to use the service function:
 
 ```
-consumeOnDidTouchSwipeLeft: (onDidTouchSwipeLeft) ->
+consumeTouchEvents: (touchEvents) ->
 
-  # Subscribe to touch event
-  onDidTouchSwipeLeft: (event) ->
-    console.log "Swiped Left!"
-    ```
+  # Subscribe to touch swipe left event
+  touchEvents.onDidTouchSwipeLeft (event) ->
+    console.log "Swiped left!"
+```
