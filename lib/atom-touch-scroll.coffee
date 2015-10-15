@@ -17,13 +17,12 @@ module.exports = AtomTouchScroll =
     touchScrollUp: (event) ->
       {args, source, deltaX, deltaY} = event
 
-      view = source.closest("atom-text-editor")
+      editorView = source.closest("atom-text-editor")
 
-      if view != null
-        editor = view.getModel()
+      if editorView != null
         # Determine amount to scroll based on delta value.
         amount = Math.abs(deltaY)
-        editor.setScrollTop(editor.getScrollTop() + amount)
+        editorView.setScrollTop(editorView.getScrollTop() + amount)
 
         args.preventDefault()
 
@@ -31,13 +30,12 @@ module.exports = AtomTouchScroll =
     touchScrollDown: (event) ->
       {args, source, deltaX, deltaY} = event
 
-      view = source.closest("atom-text-editor")
+      editorView = source.closest("atom-text-editor")
 
-      if view != null
-        editor = view.getModel()
+      if editorView != null
         # Determine amount to scroll based on delta value.
         amount = Math.abs(deltaY)
-        editor.setScrollTop(editor.getScrollTop() - amount)
+        editorView.setScrollTop(editorView.getScrollTop() - amount)
 
         args.preventDefault()
 
@@ -45,13 +43,12 @@ module.exports = AtomTouchScroll =
     touchScrollLeft: (event) ->
       {args, source, deltaX, deltaY} = event
 
-      view = source.closest("atom-text-editor")
+      editorView = source.closest("atom-text-editor")
 
-      if view != null
-        editor = view.getModel()
+      if editorView != null
         # Determine amount to scroll based on delta value.
         amount = Math.abs(deltaX)
-        editor.setScrollLeft(editor.getScrollLeft() + amount)
+        editorView.setScrollLeft(editorView.getScrollLeft() + amount)
 
         args.preventDefault()
 
@@ -59,12 +56,11 @@ module.exports = AtomTouchScroll =
     touchScrollRight: (event) ->
       {args, source, deltaX, deltaY} = event
 
-      view = source.closest("atom-text-editor")
+      editorView = source.closest("atom-text-editor")
 
-      if view != null
-        editor = view.getModel()
+      if editorView != null
         # Determine amount to scroll based on delta value.
         amount = Math.abs(deltaX)
-        editor.setScrollLeft(editor.getScrollLeft() - amount)
+        editorView.setScrollLeft(editorView.getScrollLeft() - amount)
 
         args.preventDefault()
